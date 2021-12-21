@@ -13,7 +13,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-api_keys = ['61e37a4b2dcd9754e6b26eef7b78a6b8', 'X6T0DKG5FNAWW9R9'] # financialmodelingprep, alphavantage
+api_keys = ['YOUR_API_KEY', 'YOUR_API_KEY'] # financialmodelingprep, alphavantage
 ticker = 'HLI'
 
 if __name__ == "__main__":
@@ -143,8 +143,3 @@ if __name__ == "__main__":
     plt.plot(pb_table['ROE'], b1*pb_table['ROE']+b0, color='red')
     plt.figure(figsize=(1,1), dpi=100)
     plt.show()
-        
-    
-    
-    ## Why is this different from dividends paid??
-    (income_statement['netIncome'] -  (balance_sheet['retainedEarnings']-balance_sheet['retainedEarnings'].shift(-1)))/income_statement.iloc[0]['weightedAverageShsOut']
