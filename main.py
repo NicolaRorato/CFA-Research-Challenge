@@ -13,7 +13,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-api_keys = ['61e37a4b2dcd9754e6b26eef7b78a6b8', 'X6T0DKG5FNAWW9R9'] # financialmodelingprep, alphavantage
+api_keys = ['YOUR_API_KEY', 'YOUR_API_KEY'] # financialmodelingprep, alphavantage
 ticker = 'HLI'
 
 if __name__ == "__main__":
