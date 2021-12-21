@@ -13,7 +13,7 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 
-api_keys = ['YOUR_API_KEY', 'YOUR_API_KEY'] # financialmodelingprep, alphavantage
+api_keys = ['61e37a4b2dcd9754e6b26eef7b78a6b8', 'X6T0DKG5FNAWW9R9'] # financialmodelingprep, alphavantage
 ticker = 'HLI'
 
 if __name__ == "__main__":
@@ -118,13 +118,14 @@ if __name__ == "__main__":
     for competitor in competitors[1:]:
         if os.path.exists('pd_statements/' + 'bsh' + competitor) and os.path.exists('pd_statements/' + 'ist' + competitor):
             ist = pd.read_pickle('pd_statements/' + 'ist' + competitor)
-            balance_sheet = pd.read_pickle('pd_statements/' + 'bsh' + competitor)
+            bsh = pd.read_pickle('pd_statements/' + 'bsh' + competitor)
     
         else:        
             ist = statements.income_statement(competitor, api_keys[0])
             bsh = statements.balance_sheet(competitor, api_keys[0])
-            ist.to_pickle('pd_statements/' + 'bsh' + competitor)
+            ist.to_pickle('pd_statements/' + 'ist' + competitor)
             bsh.to_pickle('pd_statements/' + 'bsh' + competitor)
+            print('DB Queried')
         
         p = float(alphav.get_live_updates(api_keys[1], competitor).loc['price'])
         
@@ -143,3 +144,8 @@ if __name__ == "__main__":
     plt.plot(pb_table['ROE'], b1*pb_table['ROE']+b0, color='red')
     plt.figure(figsize=(1,1), dpi=100)
     plt.show()
+        
+    
+    
+    ## Why is this different from dividends paid??
+    (income_statement['netIncome'] -  (balance_sheet['retainedEarnings']-balance_sheet['retainedEarnings'].shift(-1)))/income_statement.iloc[0]['weightedAverageShsOut']
